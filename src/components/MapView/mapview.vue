@@ -9,26 +9,36 @@
 
   export default {
     name: 'mapview',
+    data () {
+      return {
+        webmap: {}
+      }
+    },
     mounted() {
       this.createMap()
     },
     methods: {
       createMap: function () {
         const options = arcgisapi
-        esriLoader.loadModules(['esri/views/MapView', 'esri/WebMap'], options).then(([MapView, WebMap]) => {
-          const webmap = new WebMap({
-            portalItem: {
-              id: 'f2e9b762544945f390ca4ac3671cfa72'
-            }
+        let maplayer = ''
+        esriLoader.loadModules(['esri/Map', 'esri/views/SceneView', 'esri/layers/FeatureLayer', 'dojo/domReady!'], options).then(([Map, SceneView, FeatureLayer]) => {
+          maplayer = new Map({
+            basemap: 'streets',
+            ground: 'world-elevation'
           })
           /* eslint-disable no-new */
-          new MapView({
-            map: webmap,
+          new SceneView({
+            map: maplayer,
             container: 'viewDiv',
             center: [113.30328196851, 23.07569666626],
-            zoom: 10,
-            locale: 'zh-cn'
+            locale: 'zh-cn',
+            logo: false,
+            slider: false
           })
+          const layer = new FeatureLayer('http://172.16.50.178:6080/arcgis/rest/services/GXStonyState/smhzk_fir/MapServer/0')
+          console.log(layer)
+          maplayer.add(layer)
+          this.webmap = maplayer
         })
           .catch(err => {
             console.error(err)
@@ -40,8 +50,7 @@
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
   @import url('http://js.arcgis.com/4.6/esri/css/main.css');
-
-  #viewDiv
-    height: 870px;
-    width: 100%;
+    #viewDiv
+      height: 880px;
+      width: 100%;
 </style>

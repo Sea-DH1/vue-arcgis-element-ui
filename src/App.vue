@@ -17,31 +17,24 @@
   }
 </script>
 
-<style scoped lang="scss" rel="stylesheet/scss">
-
-  .el-header {
-    background-color: #409EFF;
-    color: #333;
-    text-align: center;
-    line-height: 60px;
-  }
-
-  .el-aside {
-    background-color: #d3dce6;
-    color: #333;
-    text-align: center;
-    line-height: 200px;
-  }
-
-  .el-main {
-    /*background-color: #E9EEF3;;*/
-    /*color: #333;*/
-    /*text-align: center;*/
-    /*line-height: 160px;*/
-    padding: 0;
-  }
-
-  body > .el-container {
-    margin-bottom: 40px;
-  }
+<style scoped lang="stylus" rel="stylesheet/stylus">
+  body >>> .el-container
+    margin-bottom: 40px
+  .el-container
+    .el-header
+      background-color: #409EFF
+      color: #333
+      text-align: center
+      line-height: 60px
+    .el-aside
+      background-color: #d3dce6
+      color: #333
+      text-align: center
+      line-height: 200px
+    .el-main
+      /*background-color: #E9EEF3;;*/
+      /*color: #333;*/
+      /*text-align: center;*/
+      /*line-height: 160px;*/
+      padding: 0
 </style>
